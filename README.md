@@ -8,4 +8,3 @@ Created a task board application to allow multiple tasks be applied and tracked 
 
 
 ## Link to Deployed Page
-https://bds6575.github.io/Brian-Personal-Blog/
