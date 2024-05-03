@@ -29,16 +29,32 @@ function createTaskCard(task) {
 // Todo: create a function to render the task list and make cards draggable
 function renderTaskList() {
   $("#todo-cards, #in-progress-cards, #done-cards").empty();
-
   taskList.forEach(task => {
     let taskCard = createTaskCard(task);
-    $("#" + task.status + "-cards").append(taskCard);
+    const laneId = task.status === 'to-do' ?  "todo" : task.status;
+    $("#" + laneId + "-cards").append(taskCard);
     // Make the task card draggable
-  taskCard.draggable({
-    cursor: "move",
-    snap: true
-  });
-
+    taskCard.draggable({
+      cursor: "move",
+      snap: true,
+      start: function(event, ui) {
+        $(event.target).attr('style', 'background-color: rgb(253, 253, 194)');
+        $(":not(#" + task.status + ")")
+        .addClass('dragging-styles')
+        .children('.card-body')
+          .removeClass('bg-light')
+          .addClass('dragging-styles');
+      },
+      stop: function(event, ui) {
+        $(event.target).attr('style', 'background-color: rgb(253, 253, 194)');
+        $("#" + task.status)
+        .removeClass('dragging-styles')
+        .children('.card-body')
+          .addClass('bg-light')
+          .removeClass('dragging-styles');
+      },
+      
+    });
   });
 }
 
@@ -89,6 +105,7 @@ function handleDrop(event, ui) {
   });
 
   localStorage.setItem("tasks", JSON.stringify(taskList));
+  renderTaskList();
 }
 
 $(document).ready(function () {

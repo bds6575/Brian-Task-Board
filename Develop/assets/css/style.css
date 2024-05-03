@@ -14,3 +14,11 @@ body {
 .task-card:hover {
   cursor: grab;
 }
+.card-body.dragging-styles {
+  background-color: transparent !important;
+  border: solid 2px gray;
+}
+
+.ui-droppable.dragging-styles {
+  background-color: transparent !important;
+}
