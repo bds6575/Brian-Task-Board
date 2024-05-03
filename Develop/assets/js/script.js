@@ -23,13 +23,6 @@ function createTaskCard(task) {
     `
   });
 
-  // Make the task card draggable
-  taskCard.draggable({
-    revert: "invalid",
-    cursor: "move",
-    containment: ".container"
-  });
-
   return taskCard;
 }
 
@@ -40,6 +33,12 @@ function renderTaskList() {
   taskList.forEach(task => {
     let taskCard = createTaskCard(task);
     $("#" + task.status + "-cards").append(taskCard);
+    // Make the task card draggable
+  taskCard.draggable({
+    cursor: "move",
+    snap: true
+  });
+
   });
 }
 
